@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import PatientList from './components/PatientList/index.tsx';
+import AddPatient from './components/AddPatient/index.jsx';
+import EditPatient from './components/EditPatient/index.jsx';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<PatientList />} />
+        <Route path="/patients/new" element={<AddPatient />} />
+        <Route path="/patients/:id/edit" element={<EditPatient />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
