@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import PatientForm from '../PatientForm/index.tsx';
 import config from '../../config.js';
+import { Container, Title } from './styles.ts';
 
 const AddPatient = () => {
   const navigate = useNavigate();
@@ -19,10 +20,10 @@ const AddPatient = () => {
   };
 
   return (
-    <div>
-      <h1>Add New Patient</h1>
+    <Container>
+      <Title>Add New Patient</Title>
       <PatientForm onSubmit={handleAddPatient} />
-    </div>
+    </Container>
   );
 };
 

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import PatientForm from '../PatientForm/index.tsx';
+import config from '../../config.js';
+import { Container, Title } from './styles.ts';
 
 const EditPatient = () => {
   const { id } = useParams();
@@ -8,13 +10,13 @@ const EditPatient = () => {
   const [initialData, setInitialData] = useState(null);
 
   useEffect(() => {
-    fetch(`/patients/${id}`)
+    fetch(`${config.backendUrl}/patients/${id}`)
       .then(response => response.json())
       .then(data => setInitialData(data));
   }, [id]);
 
   const handleEditPatient = (patient) => {
-    fetch(`/patients/${id}`, {
+    fetch(`${config.backendUrl}/patients/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -26,10 +28,10 @@ const EditPatient = () => {
   };
 
   return (
-    <div>
-      <h1>Edit Patient</h1>
+    <Container>
+      <Title>Edit Patient</Title>
       {initialData && <PatientForm initialData={initialData} onSubmit={handleEditPatient} />}
-    </div>
+    </Container>
   );
 };
 

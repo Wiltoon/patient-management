@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from ..models.patient import Patient, PatientModel
 
 def get_patient_by_id(db: Session, patient_id: int):
-    return db.query(Patient).filter(Patient.id == patient_id).first()
+    return db.query(PatientModel).filter(PatientModel.id == patient_id).first()
 
 def get_all_patients(db: Session):
     return db.query(PatientModel).all()
@@ -18,12 +18,15 @@ def create_patient(db: Session, patient: Patient):
     db.refresh(db_patient)
     return db_patient
 
-def update_patient(db: Session, existing_patient: Patient, updated_data: dict):
-    for key, value in updated_data.items():
-        setattr(existing_patient, key, value)
-    db.commit()
-    db.refresh(existing_patient)
-    return existing_patient
+def update_patient(db: Session, existing_patient: Patient):
+    db_patient = db.query(PatientModel).filter(PatientModel.id == existing_patient.id).first()
+    if db_patient:
+        db_patient.name = existing_patient.name
+        db_patient.age = existing_patient.age
+        db_patient.email = existing_patient.email
+        db.commit()
+        db.refresh(db_patient)
+    return db_patient
 
 def delete_patient(db: Session, patient: Patient):
     db.delete(patient)

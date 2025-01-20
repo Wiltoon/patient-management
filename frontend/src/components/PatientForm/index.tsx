@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Form, Input, Button, Label, Container } from './styles.ts';
 
 interface InitialData {
   name?: string;
@@ -17,21 +18,23 @@ const PatientForm = ({ onSubmit, initialData = {} as InitialData }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Name:</label>
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
-      </div>
-      <div>
-        <label>Age:</label>
-        <input type="number" value={age} onChange={(e) => setAge(e.target.value)} required />
-      </div>
-      <div>
-        <label>Email:</label>
-        <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} required />
-      </div>
-      <button type="submit">Submit</button>
-    </form>
+    <Container>
+      <Form onSubmit={handleSubmit}>
+        <div>
+          <Label>Name:</Label>
+          <Input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+        </div>
+        <div>
+          <Label>Age:</Label>
+          <Input type="number" value={age} onChange={(e) => setAge(e.target.value)} required />
+        </div>
+        <div>
+          <Label>Email:</Label>
+          <Input type="text" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        </div>
+        <Button type="submit">Submit</Button>
+      </Form>
+    </Container>
   );
 };
 

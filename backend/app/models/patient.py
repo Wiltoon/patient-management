@@ -13,7 +13,6 @@ class PatientCreate(BaseModel):
         from_attributes = True
 
 class PatientUpdate(BaseModel):
-    id: int
     name: str
     age: int
     email: str
